@@ -8,7 +8,7 @@
                 <div class="card-header">
                     <div class="row">
                     <div class="col-md-2">
-                        <a href="/create-customer.html" class="btn" style="background-color: #4643d3; color: white;"><i class="fas fa-plus"></i> Create Customer</a>
+                        <a href="{{ route('customers.create') }}" class="btn" style="background-color: #4643d3; color: white;"><i class="fas fa-plus"></i> Create Customer</a>
                     </div>
                     <div class="col-md-8">
                         <form action="">
@@ -55,7 +55,7 @@
                             <td>1902982829282</td>
                             <td>
                                 <a href="" style="color: #2c2c2c;" class="ms-1 me-1"><i class="far fa-edit"></i></a>
-                                <a href="/customer-details.html" style="color: #2c2c2c;" class="ms-1 me-1"><i class="far fa-eye"></i></a>
+                                <a href="{{ route('customers.show',['customer' => '0']) }}" style="color: #2c2c2c;" class="ms-1 me-1"><i class="far fa-eye"></i></a>
                                 <a href="" style="color: #2c2c2c;" class="ms-1 me-1"><i class="fas fa-trash-alt"></i></a>
                             </td>
                           </tr>
