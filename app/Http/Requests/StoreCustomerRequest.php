@@ -11,7 +11,7 @@ class StoreCustomerRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -22,7 +22,13 @@ class StoreCustomerRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'image' => ['nullable','image','max:10000'],
+            'first_name' => ['required','max:255','string'],
+            'last_name' => ['required','max:255','string'],
+            'email' => ['required','email'],
+            'phone' => ['required','string'],
+            'bank_acc' => ['required','numeric'],
+            'about' => ['nullable' , 'string' , 'max:500']
         ];
     }
 }
