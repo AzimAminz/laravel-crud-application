@@ -15,7 +15,8 @@ class CustomerController extends Controller
     public function index()
     {
         //
-        return view('index');
+        $customers = Customer::all();
+        return view('index',compact('customers'));
     }
 
     /**
@@ -33,8 +34,25 @@ class CustomerController extends Controller
      */
     public function store(StoreCustomerRequest $request)
     {
-        //
-    
+
+        $customer = new Customer();
+
+        if ($request->hasFile('image')) {
+            $image = $request->file('image');
+            $fileName = $image->store('/','public');
+            $customer->image = $fileName;
+        }
+
+        $customer->first_name = $request->first_name;
+        $customer->last_name = $request->last_name;
+        $customer->email = $request->email;
+        $customer->phone = $request->phone;
+        $customer->bank_acc = $request->bank_acc;
+        $customer->about = $request->about;
+        $customer->save();
+
+        return redirect()->route('customers.index');
+
     }
 
     /**
