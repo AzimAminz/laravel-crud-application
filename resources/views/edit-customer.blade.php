@@ -19,7 +19,7 @@
                         @method('PUT')
                         <div class="row">
                             <div class="col-md-12 mb-3">
-                                <img src="{{ asset('uploads/'.$customer->image) }}" alt="" style="width: 100px; height: 100px; ">
+                                <img src="{{ $customer->image == '/default-images/avatar.png' ? asset('default-images/avatar.png') : asset('uploads/' . $customer->image) ; }}" alt="" style="width: 100px; height: 150px; object-fit: cover; ">
                                 <div class="form-group">
                                     <label for="image">Image</label>
                                     <input type="file" class="form-control @error('image') is-invalid  @enderror" id="image" name="image">

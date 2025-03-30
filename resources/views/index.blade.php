@@ -59,7 +59,7 @@
                                     <td>
                                         <a href="{{ route('customers.edit',['customer'=> $customer]) }}" style="color: #2c2c2c;" class="ms-1 me-1"><i
                                                 class="far fa-edit"></i></a>
-                                        <a href="{{ route('customers.show', ['customer' => '0']) }}" style="color: #2c2c2c;"
+                                        <a href="{{ route('customers.show', ['customer' => $customer]) }}" style="color: #2c2c2c;"
                                             class="ms-1 me-1"><i class="far fa-eye"></i></a>
                                         <a href="" style="color: #2c2c2c;" class="ms-1 me-1"><i
                                                 class="fas fa-trash-alt"></i></a>
