@@ -6,6 +6,7 @@ use App\Http\Requests\StoreCustomerRequest;
 use App\Http\Requests\UpdateCustomerRequest;
 use App\Models\Customer;
 use Illuminate\Http\Request;
+use File;
 
 class CustomerController extends Controller
 {
@@ -16,7 +17,7 @@ class CustomerController extends Controller
     {
         //
         $customers = Customer::all();
-        return view('index',compact('customers'));
+        return view('index', compact('customers'));
     }
 
     /**
@@ -28,7 +29,7 @@ class CustomerController extends Controller
         return view('create-customer');
     }
 
- 
+
     /**
      * Store a newly created resource in storage.
      */
@@ -39,7 +40,7 @@ class CustomerController extends Controller
 
         if ($request->hasFile('image')) {
             $image = $request->file('image');
-            $fileName = $image->store('/','public');
+            $fileName = $image->store('/', 'public');
             $customer->image = $fileName;
         }
 
@@ -52,7 +53,6 @@ class CustomerController extends Controller
         $customer->save();
 
         return redirect()->route('customers.index');
-
     }
 
     /**
@@ -61,7 +61,7 @@ class CustomerController extends Controller
     public function show(Customer $customer)
     {
         //
-        return view('customer-details',['customer' => $customer]);
+        return view('customer-details', ['customer' => $customer]);
     }
 
     /**
@@ -69,7 +69,7 @@ class CustomerController extends Controller
      */
     public function edit(Customer $customer)
     {
-        //
+        return view('edit-customer', ['customer' => $customer]);
     }
 
     /**
@@ -77,6 +77,27 @@ class CustomerController extends Controller
      */
     public function update(UpdateCustomerRequest $request, Customer $customer)
     {
+        if ($request->hasFile('image')) {
+            // Delete the old image if it exists
+            $oldImagePath = public_path('uploads/' . $customer->image);
+            if (File::exists($oldImagePath)) {
+                File::delete($oldImagePath);
+            }
+            // Store the new image
+            $image = $request->file('image');
+            $fileName = $image->store('/', 'public');
+            $customer->image = $fileName;
+        }
+
+        $customer->first_name = $request->first_name;
+        $customer->last_name = $request->last_name;
+        $customer->email = $request->email;
+        $customer->phone = $request->phone;
+        $customer->bank_acc = $request->bank_acc;
+        $customer->about = $request->about;
+        $customer->save();
+
+        return redirect()->route('customers.index');
         //
     }
 

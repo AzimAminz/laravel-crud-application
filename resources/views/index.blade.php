@@ -57,7 +57,7 @@
                                     <td>{{ $customer->email }}</td>
                                     <td>{{ $customer->bank_acc }}</td>
                                     <td>
-                                        <a href="" style="color: #2c2c2c;" class="ms-1 me-1"><i
+                                        <a href="{{ route('customers.edit',['customer'=> $customer]) }}" style="color: #2c2c2c;" class="ms-1 me-1"><i
                                                 class="far fa-edit"></i></a>
                                         <a href="{{ route('customers.show', ['customer' => '0']) }}" style="color: #2c2c2c;"
                                             class="ms-1 me-1"><i class="far fa-eye"></i></a>
